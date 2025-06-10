@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "github.com/teten-nugraha/bitlab-commerce/order-service/gen/order";
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+}
+
+message OrderItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  double price = 3;
+}
+
+message CreateOrderRequest {
+  string user_id = 1;
+  repeated OrderItem items = 2;
+}
+
+message OrderResponse {
+  string order_id = 1;
+  string status = 2;
+  double total = 3;
+}
+
+message PaymentRequest {
+  string order_id = 1;
+  string payment_method = 2;
+  double amount = 3;
+  string currency = 4;
+}
+
+message PaymentResponse {
+  string payment_id = 1;
+  string status = 2;
+  string payment_url = 3;
+}

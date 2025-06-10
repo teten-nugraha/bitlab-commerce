@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/teten-nugraha/bitlab-commerce/payment-service/gen/payment";
+
+service PaymentService {
+  rpc CreatePayment(PaymentRequest) returns (PaymentResponse);
+}
+
+message PaymentRequest {
+  string order_id = 1;
+  string user_id = 2;
+  double amount = 3;
+  string currency = 4;
+  string payment_method = 5;
+}
+
+message PaymentResponse {
+  string payment_id = 1;
+  string status = 2;
+  string payment_url = 3;
+}
